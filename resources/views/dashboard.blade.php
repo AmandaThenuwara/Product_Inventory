@@ -80,7 +80,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Total Stock Value</p>
-                                <p class="text-2xl font-semibold text-gray-800">${{ number_format($totalStockValue, 2) }}</p>
+                                <p class="text-2xl font-semibold text-gray-800">LKR{{ number_format($totalStockValue, 2) }}</p>
                             </div>
                             <div class="p-3 rounded-full bg-purple-500/10">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -171,7 +171,7 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        ${{ number_format($product->price, 2) }}
+                                        LKR{{ number_format($product->price, 2) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <a href="{{ route('products.show', $product->id) }}" class="text-[#3B82F6] hover:text-[#2563EB] mr-3">View</a>

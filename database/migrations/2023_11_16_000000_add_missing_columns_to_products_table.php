@@ -4,19 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnsToProductsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            // Add columns if they don't exist
             if (!Schema::hasColumn('products', 'sku')) {
-                $table->string('sku')->nullable()->after('name');
+                $table->string('sku')->nullable()->after('name')->unique();
             }
             
             if (!Schema::hasColumn('products', 'category')) {
@@ -24,7 +21,7 @@ class AddColumnsToProductsTable extends Migration
             }
             
             if (!Schema::hasColumn('products', 'reorder_level')) {
-                $table->integer('reorder_level')->nullable()->after('stock_quantity');
+                $table->integer('reorder_level')->nullable()->default(10)->after('stock_quantity');
             }
             
             if (!Schema::hasColumn('products', 'supplier_id')) {
@@ -35,13 +32,11 @@ class AddColumnsToProductsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $columns = ['category', 'reorder_level', 'supplier_id'];
+            $columns = ['sku', 'category', 'reorder_level', 'supplier_id'];
             
             foreach ($columns as $column) {
                 if (Schema::hasColumn('products', $column)) {
@@ -50,4 +45,4 @@ class AddColumnsToProductsTable extends Migration
             }
         });
     }
-}
+};
