@@ -26,7 +26,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Total Products</p>
-                                <p class="text-2xl font-semibold text-gray-800">248</p>
+                                <p class="text-2xl font-semibold text-gray-800">{{ $totalProducts }}</p>
                             </div>
                             <div class="p-3 rounded-full bg-[#3B82F6]/10">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3B82F6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,7 +34,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <p class="text-sm text-green-600 mt-2">+12 added this month</p>
+                        <p class="text-sm text-green-600 mt-2">{{ $newProductsCount }} added this month</p>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Low Stock Items</p>
-                                <p class="text-2xl font-semibold text-gray-800">15</p>
+                                <p class="text-2xl font-semibold text-gray-800">{{ $lowStockCount }}</p>
                             </div>
                             <div class="p-3 rounded-full bg-amber-500/10">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,7 +62,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Categories</p>
-                                <p class="text-2xl font-semibold text-gray-800">18</p>
+                                <p class="text-2xl font-semibold text-gray-800">{{ $categoriesCount }}</p>
                             </div>
                             <div class="p-3 rounded-full bg-emerald-500/10">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +80,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-sm font-medium text-gray-500">Total Stock Value</p>
-                                <p class="text-2xl font-semibold text-gray-800">$186,429</p>
+                                <p class="text-2xl font-semibold text-gray-800">${{ number_format($totalStockValue, 2) }}</p>
                             </div>
                             <div class="p-3 rounded-full bg-purple-500/10">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,7 +88,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <p class="text-sm text-purple-600 mt-2">↑ 12% from last month</p>
+                        <p class="text-sm text-purple-600 mt-2">Current inventory value</p>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                             Recent Products
                         </h3>
                         <div class="relative">
-                            <input type="text" placeholder="Search products..." class="px-4 py-2 pr-8 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent text-sm">
+                            <input type="text" id="product-search" placeholder="Search products..." class="px-4 py-2 pr-8 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#3B82F6] focus:border-transparent text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute right-2 top-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
@@ -124,157 +124,81 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Product 1 -->
+                                @forelse($products as $product)
                                 <tr class="hover:bg-blue-50 transition-colors duration-200">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 h-10 w-10 bg-[#3B82F6]/10 rounded-md flex items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#3B82F6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                                                 </svg>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Dell XPS 15 Laptop</div>
-                                                <div class="text-xs text-gray-500">Added on 15 Oct 2023</div>
+                                                <div class="text-sm font-medium text-gray-900">{{ $product->name }}</div>
+                                                <div class="text-xs text-gray-500">Added {{ $product->created_at->format('d M Y') }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">DLXPS-15-2023</div>
+                                        <div class="text-sm text-gray-900">
+                                            @if(isset($product->sku))
+                                                {{ $product->sku }}
+                                            @else
+                                                N/A
+                                            @endif
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                            Electronics
+                                            @if(isset($product->category))
+                                                {{ $product->category }}
+                                            @else
+                                                Uncategorized
+                                            @endif
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-green-600">24 in stock</div>
+                                        @if($product->stock_quantity > 10)
+                                            <div class="text-sm font-medium text-green-600">{{ $product->stock_quantity }} in stock</div>
+                                        @elseif($product->stock_quantity > 0)
+                                            <div class="text-sm font-medium text-amber-600">{{ $product->stock_quantity }} in stock</div>
+                                        @else
+                                            <div class="text-sm font-medium text-red-600">Out of stock</div>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        $1,299.99
+                                        ${{ number_format($product->price, 2) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-[#3B82F6] hover:text-[#2563EB] mr-3">View</a>
-                                        <a href="#" class="text-gray-600 hover:text-gray-900">Edit</a>
+                                        <a href="{{ route('products.show', $product->id) }}" class="text-[#3B82F6] hover:text-[#2563EB] mr-3">View</a>
+                                        <a href="{{ route('products.edit', $product->id) }}" class="text-gray-600 hover:text-gray-900">Edit</a>
                                     </td>
                                 </tr>
-                                
-                                <!-- Product 2 -->
-                                <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 bg-purple-100 rounded-md flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                                </svg>
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">iPhone 14 Pro</div>
-                                                <div class="text-xs text-gray-500">Added on 12 Oct 2023</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">IPH-14PRO-256</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                                            Mobile Devices
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-amber-600">8 in stock</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        $999.99
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-[#3B82F6] hover:text-[#2563EB] mr-3">View</a>
-                                        <a href="#" class="text-gray-600 hover:text-gray-900">Edit</a>
+                                @empty
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                        No products found in the database. 
+                                        <a href="{{ route('products.create') }}" class="text-[#3B82F6] hover:underline">Add your first product</a>
                                     </td>
                                 </tr>
-                                
-                                <!-- Product 3 -->
-                                <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 bg-red-100 rounded-md flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                </svg>
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Samsung 4K Smart TV</div>
-                                                <div class="text-xs text-gray-500">Added on 10 Oct 2023</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">SAM-TV-4K-55</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                            Home Entertainment
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-red-600">2 in stock</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        $799.99
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-[#3B82F6] hover:text-[#2563EB] mr-3">View</a>
-                                        <a href="#" class="text-gray-600 hover:text-gray-900">Edit</a>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Product 4 -->
-                                <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 bg-green-100 rounded-md flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
-                                                </svg>
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">Logitech MX Master 3</div>
-                                                <div class="text-xs text-gray-500">Added on 08 Oct 2023</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">LOG-MXM3-BLK</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Computer Accessories
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-green-600">42 in stock</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        $99.99
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="#" class="text-[#3B82F6] hover:text-[#2563EB] mr-3">View</a>
-                                        <a href="#" class="text-gray-600 hover:text-gray-900">Edit</a>
-                                    </td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
                     <div class="mt-6 flex justify-between items-center">
                         <div class="text-sm text-gray-500">
-                            Showing 4 of 248 products
+                            @if($products->count() > 0)
+                                Showing {{ $products->count() }} of {{ $totalProducts }} products
+                            @else
+                                No products found
+                            @endif
                         </div>
                         <div class="flex">
-                            <a href="#" class="text-sm text-[#3B82F6] hover:text-[#2563EB] font-medium flex items-center gap-1">
+                            <a href="{{ route('products.index') }}" class="text-sm text-[#3B82F6] hover:text-[#2563EB] font-medium flex items-center gap-1">
                                 View All Products
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -421,4 +345,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Add JavaScript for product search functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('product-search');
+            const productTable = document.querySelector('table');
+            const productRows = productTable.querySelectorAll('tbody tr');
+            
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                productRows.forEach(row => {
+                    // Get product name and SKU from the row
+                    const productName = row.querySelector('td:nth-child(1)')?.textContent.toLowerCase() || '';
+                    const productSku = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase() || '';
+                    const productCategory = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase() || '';
+                    
+                    // Check if the search term is found in the product name, SKU, or category
+                    if (productName.includes(searchTerm) || 
+                        productSku.includes(searchTerm) || 
+                        productCategory.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Update the "Showing X of Y products" count
+                const visibleRows = [...productRows].filter(row => row.style.display !== 'none').length;
+                const countDisplay = document.querySelector('.text-sm.text-gray-500');
+                if (countDisplay && productRows.length > 0) {
+                    const totalCount = {{ $totalProducts }};
+                    if (searchTerm) {
+                        countDisplay.textContent = `Showing ${visibleRows} filtered results of ${totalCount} products`;
+                    } else {
+                        countDisplay.textContent = `Showing ${productRows.length} of ${totalCount} products`;
+                    }
+                }
+            });
+        });
+    </script>
 </x-app-layout>
