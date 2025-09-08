@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 8, 2);
             $table->integer('stock_quantity');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->string('category');
             $table->string('sku')->unique();
-            $table->foreignId('supplier_id')->constrained()->onDelete('cascade');
+            $table->string('supplier_id');
             $table->integer('reorder_level')->default(5);
             $table->text('description')->nullable();
             $table->timestamps();
