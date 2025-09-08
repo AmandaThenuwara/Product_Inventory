@@ -299,13 +299,13 @@
                     <div class="p-6">
                         <h3 class="text-lg font-medium text-gray-900 mb-4">Quick Actions</h3>
                         <div class="space-y-3">
-                            <a href="#" class="flex items-center p-3 rounded-lg bg-[#F3F4F6] hover:bg-[#E5E7EB] transition-all">
+                            <a href="{{ route('products.create') }}" class="flex items-center p-3 rounded-lg bg-[#F3F4F6] hover:bg-[#E5E7EB] transition-all">
                                 <div class="p-2 rounded-md bg-[#3B82F6]/10 mr-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#3B82F6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                     </svg>
                                 </div>
-                                <span class="text-sm font-medium">Add New Supplier</span>
+                                <span class="text-sm font-medium">Add New Product</span>
                             </a>
                             <a href="#" class="flex items-center p-3 rounded-lg bg-[#F3F4F6] hover:bg-[#E5E7EB] transition-all">
                                 <div class="p-2 rounded-md bg-[#3B82F6]/10 mr-3">
