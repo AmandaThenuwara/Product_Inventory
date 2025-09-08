@@ -44,8 +44,12 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|decimal:2|min:0',
-            'description' => 'nullable|string',
             'stock_quantity' => 'required|integer|min:1',
+            'category_id' => 'required|exists:categories,id',
+            'sku' => 'required|string|max:255|unique:products,sku,' . $product->id,
+            'supplier_id' => 'required|exists:suppliers,id',
+            'reorder_level' => 'required|integer|min:1',
+            'description' => 'nullable|string',
         ]);
 
         $product->update($data);
